@@ -85,15 +85,19 @@ server.backend = function(base_dir, socket_emitter, user_config) {
 
   (function() {
     var procfs = require('procfs-stats');
+    var diskusage = require('diskusage');
     var HOST_HEARTBEAT_DELAY_MS = 1000;
 
     function host_heartbeat() {
       async.waterfall([
         async.apply(procfs.meminfo)
       ], function(err, meminfo) {
+        let diskusageInfo = diskusage.checkSync('/');
         self.front_end.emit('host_heartbeat', {
           'uptime': os.uptime(),
           'freemem': ((meminfo && meminfo['MemAvailable']) ? meminfo['MemAvailable'] * 1024 : os.freemem()),
+          'diskfree': ((diskusage && diskusageInfo) ? diskusageInfo.free : 1),
+          'disktotal': ((diskusage && diskusageInfo) ? diskusageInfo.total : 1),
           'loadavg': os.loadavg()
         })
       })
