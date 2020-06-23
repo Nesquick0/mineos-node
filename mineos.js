@@ -1204,6 +1204,39 @@ mineos.mc = function(server_name, base_dir) {
     })
   }
 
+  self.backup_prune = function(msg, callback) {
+    // Check that parameter is positive int.
+    let step = Math.floor(Number(msg));
+    if (step !== Infinity && String(step) === msg && step > 0)
+      self.prune(msg + 'B', callback);
+    else
+      callback(true);
+  }
+
+  self.archive_prune = function(msg, callback) {
+    // Check that parameter is positive int.
+    let step = Math.floor(Number(msg));
+    if (!(step !== Infinity && String(step) === msg && step > 0))
+      callback(true);
+    
+    async.waterfall([
+      function(cb) {
+        // First get list of archives. Should be sorted, newest first.
+        self.list_archives(function(err, archives) {
+          cb(err, archives);
+        })
+      },
+      function(archives, cb) {
+        // Delete archives from back to target index.
+        for (let i = archives.length-1; i >= step; i--) {
+          self.delete_archive(archives[i].filename, function(err) {
+            cb(err);
+          });
+        }
+      }
+    ], callback);
+  }
+
   self.property = function(property, callback) {
     switch(property) {
       case 'owner':

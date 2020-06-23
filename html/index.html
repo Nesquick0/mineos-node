@@ -1345,6 +1345,8 @@
                                                                     <option translate="CREATE_NEW_RESTORE_POINT" value="backup"></option>
                                                                     <option translate="CREATE_NEW_ARCHIVE" value="archive"></option>
                                                                     <option ng-show="current && servers[current].live_logs['logs/latest.log'].length" translate="COMMIT_THEN_CREATE_ARCHIVE" value="archive_with_commit"></option>
+                                                                    <option translate="PRUNE_RESTORE_POINT" value="backup_prune"></option>
+                                                                    <option translate="PRUNE_ARCHIVE" value="archive_prune"></option>
                                                                     <option translate="SEND_TO_CONSOLE" value="stuff"></option>
                                                                 </select>
                                                             </div>
@@ -1356,7 +1358,7 @@
                                                         <!-- Input Text -->
                                                         <div class="control-group">
                                                             <div class="controls">
-                                                                <input type="text" name="input-text" class="span12" ng-model="cron.msg" ng-show="cron.action == 'stuff'" />
+                                                                <input type="text" name="input-text" class="span12" ng-model="cron.msg" ng-show="cron.action == 'stuff' || cron.action == 'backup_prune' || cron.action == 'archive_prune'" />
                                                             </div>
                                                         </div><!--/ Input Text -->
                                                     </p>

@@ -116,6 +116,7 @@
   "FAILURE": "Uh oh!",
   "RESTORE_POINT_FAILED": "Restore point attempt failed",
   "CREATE_NEW_RESTORE_POINT": "Create a new restore point",
+  "PRUNE_RESTORE_POINT": "Prune older restore points (int)",
 
   "MOST_RECENT_ARCHIVE": "Most recent archive",
   "OLDEST_ARCHIVE": "Oldest Archive",
@@ -124,6 +125,7 @@
   "ARCHIVE_FAILED": "Archive attempt failed",
   "CREATE_NEW_ARCHIVE": "Create a new archive",
   "COMMIT_THEN_CREATE_ARCHIVE": "save-all then create archive",
+  "PRUNE_ARCHIVE": "Prune older archives (int)",
 
   "OWNERSHIP_AND_DISK_USAGE": "Ownership and Disk Usage",
   "SERVER_OWNER": "Server Owner",
